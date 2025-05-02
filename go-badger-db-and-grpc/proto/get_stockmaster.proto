@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "proto/generated";
+
+service StockService {
+  rpc GetStockMaster (StockRequest) returns (StockMaster);
+}
+
+message StockRequest {
+  string key = 1;
+}
+
+message StockMaster {
+  string value = 1;
+}
