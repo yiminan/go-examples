@@ -11,7 +11,7 @@ import (
 	"context"
 
 	"net"
-	pb "github.com/yiminan/go-example-badgerdb-and-grpc/proto/generated"
+	pb "github.com/yiminan/go-examples/go-badger-db-and-grpc/proto/generated"
 
 	"google.golang.org/grpc"
 )
