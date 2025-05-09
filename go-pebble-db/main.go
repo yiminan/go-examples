@@ -135,13 +135,13 @@ func scanHandler(w http.ResponseWriter, r *http.Request) {
 
 	prefix := r.URL.Query().Get("prefix")
 	// If no prefix is provided, we'll scan all keys
-	
+
 	// Create an iterator
 	iter, _ := db.NewIter(nil)
 	defer iter.Close()
 
 	results := make(map[string]string)
-	
+
 	// If prefix is provided, seek to that prefix
 	if prefix != "" {
 		iter.SeekGE([]byte(prefix))
@@ -152,12 +152,12 @@ func scanHandler(w http.ResponseWriter, r *http.Request) {
 	// Iterate and collect results
 	for ; iter.Valid(); iter.Next() {
 		key := string(iter.Key())
-		
+
 		// If we have a prefix and the current key doesn't start with it, break
 		if prefix != "" && len(key) >= len(prefix) && key[:len(prefix)] != prefix {
 			break
 		}
-		
+
 		value := append([]byte{}, iter.Value()...)
 		results[key] = string(value)
 	}
