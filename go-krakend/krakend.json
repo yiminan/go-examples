@@ -1,0 +1,21 @@
+{
+  "version": 3,
+  "name": "go-krakend",
+  "port": 8080,
+  "timeout": "3000ms",
+  "endpoints": [
+    {
+      "endpoint": "/api/users",
+      "method": "GET",
+      "backend": [
+        {
+          "url_pattern": "/users",
+          "host": [
+            "http://localhost:3001"
+          ],
+          "method": "GET"
+        }
+      ]
+    }
+  ]
+}
