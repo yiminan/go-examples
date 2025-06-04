@@ -1,18 +1,26 @@
 {
   "version": 3,
-  "name": "go-krakend",
+  "name": "krakend-gateway",
   "port": 8080,
   "timeout": "3000ms",
+  "telemetry": {
+    "metrics": {
+      "namespace": "krakend",
+      "port": 8090,
+      "expose_endpoint": true,
+      "endpoint": "/__stats"
+    }
+  },
   "endpoints": [
     {
       "endpoint": "/api/users",
       "method": "GET",
       "backend": [
         {
-          "url_pattern": "/users",
           "host": [
             "http://localhost:3001"
           ],
+          "url_pattern": "/users",
           "method": "GET"
         }
       ]

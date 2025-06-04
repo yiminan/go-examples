@@ -60,7 +60,6 @@ docker run -it -p 8080:8080 -v "$PWD:/etc/krakend" devopsfaith/krakend run -c /e
   "name": "krakend-gateway",
   "port": 8080,
   "timeout": "3000ms",
-
   "telemetry": {
     "metrics": {
       "namespace": "krakend",
@@ -75,7 +74,9 @@ docker run -it -p 8080:8080 -v "$PWD:/etc/krakend" devopsfaith/krakend run -c /e
       "method": "GET",
       "backend": [
         {
-          "host": ["http://localhost:3001"],
+          "host": [
+            "http://localhost:3001"
+          ],
           "url_pattern": "/users",
           "method": "GET"
         }
