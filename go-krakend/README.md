@@ -52,20 +52,7 @@ docker run -it -p 8080:8080 -v "$PWD:/etc/krakend" devopsfaith/krakend run -c /e
 
 : Prometheus에서 <http://localhost:8090/__stats> 로 metrics 수집 가능
 
-```yml
-"telemetry": {
-  "metrics": {
-    "namespace": "krakend",
-    "port": 8090,
-    "expose_endpoint": true,
-    "endpoint": "/__stats"
-  }
-}
-```
-
-## 4. KrakenD에서 Prometheus Metrics 활성화 가이드
-
-### 4.1. `krakend.json` 설정 예시
+### 3.1. `krakend.json` 설정 예시
 
 ```yml
 {
@@ -73,6 +60,7 @@ docker run -it -p 8080:8080 -v "$PWD:/etc/krakend" devopsfaith/krakend run -c /e
   "name": "krakend-gateway",
   "port": 8080,
   "timeout": "3000ms",
+
   "telemetry": {
     "metrics": {
       "namespace": "krakend",
@@ -103,7 +91,7 @@ docker run -it -p 8080:8080 -v "$PWD:/etc/krakend" devopsfaith/krakend run -c /e
 - expose_endpoint: true로 설정 시 endpoint가 활성화됨
 -> 위 설정으로 <http://localhost:8090/__stats> 에서 Prometheus-compatible 메트릭이 제공됩니다.
 
-### 4.2. Prometheus 설정 (prometheus.yml)
+### 3.2. Prometheus 설정 (prometheus.yml)
 
 ```yml
 scrape_configs:
@@ -112,7 +100,7 @@ scrape_configs:
       - targets: ['host.docker.internal:8090']
 ```
 
-### 4.3. 수집 가능한 주요 메트릭
+### 3.3. 수집 가능한 주요 메트릭
 
 Metric 이름 : 설명
 krakend_request_duration : 요청 처리 시간
@@ -123,16 +111,16 @@ krakend_backend_latency : 백엔드 호출 지연시간
 krakend_backend_errors : 백엔드 오류 횟수
 krakend_status_count : HTTP 상태코드별 횟수 (200, 500 등)
 
-### 4.4. Grafana 대시보드 연동
+### 3.4. Grafana 대시보드 연동
 
-4.4.1. Grafana에서 Prometheus Data Source 연결
-4.4.2. Dashboard → Import
-4.4.3. 아래 중 하나 사용:
+3.4.1. Grafana에서 Prometheus Data Source 연결
+3.4.2. Dashboard → Import
+3.4.3. 아래 중 하나 사용:
 
 - Grafana Dashboard ID: 11835
 - 또는 JSON: krakend-prometheus-dashboard
 
-## 5. Docker-Compose 예시
+## 4. Docker-Compose 예시
 
 ```yml
 version: '3'
