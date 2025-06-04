@@ -94,6 +94,8 @@ docker run -it -p 8080:8080 -v "$PWD:/etc/krakend" devopsfaith/krakend run -c /e
 
 ### 3.2. Prometheus 설정 (prometheus.yml)
 
+: Docker 환경에서는 localhost 대신 host.docker.internal 또는 내부 네트워크 IP 사용
+
 ```yml
 scrape_configs:
   - job_name: 'krakend'
@@ -121,7 +123,7 @@ krakend_status_count : HTTP 상태코드별 횟수 (200, 500 등)
 - Grafana Dashboard ID: 11835
 - 또는 JSON: krakend-prometheus-dashboard
 
-## 4. Docker-Compose 예시
+## 4.  Docker-Compose 통합 예시 (KrakenD + Prometheus + Grafana)
 
 ```yml
 version: '3'
