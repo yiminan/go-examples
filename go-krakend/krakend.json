@@ -3,12 +3,16 @@
   "name": "krakend-gateway",
   "port": 8080,
   "timeout": "3000ms",
-  "telemetry": {
-    "metrics": {
-      "namespace": "krakend",
-      "port": 8090,
-      "expose_endpoint": true,
-      "endpoint": "/__stats"
+  "extra_config": {
+    "telemetry/metrics": {
+      "collection_time": "60s", 
+      "listen_address": ":8090"
+    },
+    "telemetry/logging": {
+      "level": "DEBUG",
+      "prefix": "[KRAKEND]",
+      "syslog": false,
+      "stdout": true
     }
   },
   "endpoints": [

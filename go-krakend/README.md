@@ -48,6 +48,8 @@ docker run -it -p 8080:8080 -v "$PWD:/etc/krakend" devopsfaith/krakend run -c /e
 }
 ```
 
+- `krakend run -c krakend.json` 명령어로 KrakenD를 실행
+
 ## 3. Prometheus Metrics 활성화 (Optional)
 
 : Prometheus에서 <http://localhost:8090/__stats> 로 metrics 수집 가능
@@ -60,12 +62,16 @@ docker run -it -p 8080:8080 -v "$PWD:/etc/krakend" devopsfaith/krakend run -c /e
   "name": "krakend-gateway",
   "port": 8080,
   "timeout": "3000ms",
-  "telemetry": {
-    "metrics": {
-      "namespace": "krakend",
-      "port": 8090,
-      "expose_endpoint": true,
-      "endpoint": "/__stats"
+  "extra_config": {
+    "telemetry/metrics": {
+      "collection_time": "60s", 
+      "listen_address": ":8090"
+    },
+    "telemetry/logging": {
+      "level": "DEBUG",
+      "prefix": "[KRAKEND]",
+      "syslog": false,
+      "stdout": true
     }
   },
   "endpoints": [
